@@ -1,0 +1,2 @@
+http://updates.html5rocks.com/2012/08/When-milliseconds-are-not-enough-performance-now
+

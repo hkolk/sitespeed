@@ -2,18 +2,22 @@
 <html>
     <head>
         <script type="text/javascript">
-            var sitespeed = {};
-            sitespeed.data = {};
-            sitespeed.data.sessionid = "harm-session";
-            sitespeed.data.pageid = "<?=uniqid();?>";
-            sitespeed.data.domStart = new Date().getTime();
-            sitespeed.currentTime = function() {
+        var sitespeed = {
+            data: {},
+            currentTime: function() {
+                return Date.now();
                 return new Date().getTime();
-            }
-            sitespeed.event = function(name) {
+            },
+            event: function(name) {
                 sitespeed.data.events = sitespeed.data.events || {};
                 sitespeed.data.events[name] = sitespeed.currentTime();
-            }
+             }
+        }
+        sitespeed.debug = true;
+        sitespeed.postUri = "sensor.php";
+        sitespeed.strapped = sitespeed.currentTime();
+        sitespeed.data.sessionid = "harm-session";
+        sitespeed.data.pageid = "<?=uniqid();?>";
         </script>
     </head>
     <body>
@@ -24,6 +28,10 @@
         </script>
         <a href="?<?=time()?>">Clickie</a>
         <script>sitespeed.event("beforeBanner");</script>
+        <script>
+        var tag_string = '<script language="JavaScript" src="http://ad.nl.doubleclick.net/adj/mpnl.0/home;pos=homemb;tile=2;sz=440x250;ord="+ts+"?" type="text/javascript"><' + '/script>';
+        document.write(tag_string);
+        </script>
         <script>sitespeed.event("afterBanner");</script>
     </body>
 </html>

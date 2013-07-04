@@ -5,6 +5,7 @@ sitespeed.data.url = sitespeed.data.url || document.location.toString();
 
 if (window.performance && window.performance.timing) {
     var timing = window.performance.timing;
+    sitespeed.data.hasPerformance     = true;
     sitespeed.data.domStart           = timing.loadEventStart;
     sitespeed.data.redirectTime       = timing.redirectEnd - timing.redirectStart;
     sitespeed.data.connectTime        = timing.connectEnd - timing.connectStart;
@@ -14,15 +15,20 @@ if (window.performance && window.performance.timing) {
     sitespeed.data.domContentTime     = timing.domContentLoadedEventStart - timing.fetchStart; // red line in chrome dev tools
     sitespeed.data.domCompleteTime    = timing.domComplete - timing.domLoading;
 } else {
-    sitespeed.data.domContentTime     = new Date().getTime() - sitespeed.data.domStart;
+    sitespeed.data.domContentTime     = new Date().getTime() - sitespeed.data.strapped;
+    sitespeed.data.domStart = sitespeed.data.strapped;
 }
-$.ajax({
-    type: "POST",
-    url: "sensor.php",
-    //data: o
-    data: sitespeed.data
-}).done(function( msg ) {
-    // todo!!
-    alert( "Data Saved: " + msg );
-});
+if(typeof sitespeed.postUri != "undefined") {
+    $.ajax({
+        type: "POST",
+        url: sitespeed.postUri,
+        data: sitespeed.data
+    }).done(function( msg ) {
+        // todo!!
+        if(typeof sitespeed.debug != "undefined" && sitespeed.debug) {
+            console.log( "Data Saved: " + msg );
+        }
+    });
+}
+
 });
