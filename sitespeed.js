@@ -6,7 +6,7 @@ sitespeed.data.url = sitespeed.data.url || document.location.toString();
 if (window.performance && window.performance.timing) {
     var timing = window.performance.timing;
     sitespeed.data.hasPerformance     = true;
-    sitespeed.data.domStart           = timing.loadEventStart;
+    sitespeed.data.domStart           = timing.domLoading;
     sitespeed.data.redirectTime       = timing.redirectEnd - timing.redirectStart;
     sitespeed.data.connectTime        = timing.connectEnd - timing.connectStart;
     sitespeed.data.waitTime           = timing.responseStart - timing.requestStart;
