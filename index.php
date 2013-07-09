@@ -2,6 +2,7 @@
 <html>
     <head>
         <script type="text/javascript">
+        // Bootstrap of script
         var sitespeed = {
             data: {},
             currentTime: function() {
@@ -13,6 +14,7 @@
                 sitespeed.data.events[name] = sitespeed.currentTime();
              }
         }
+        // end of bootstrap
         sitespeed.debug = true;
         sitespeed.postUri = "sensor.php";
         sitespeed.strapped = sitespeed.currentTime();
